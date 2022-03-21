@@ -12,6 +12,8 @@ import './App.css';
 function App() {
 
   const [places, setPlaces] = useState([])
+  const [childClicked, setChildClicked] = useState(null)
+  
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState({})
 
@@ -25,7 +27,6 @@ function App() {
   useEffect(() => {
     getPlacesData(bounds.sw, bounds.ne)
       .then((data) => {
-        console.log(data)
         setPlaces(data)
       })
   }, [coordinates, bounds])
@@ -38,13 +39,16 @@ function App() {
         <Grid item xs={12} md={4}>
           <List
             places={places}
+            childClicked={childClicked}
           />
         </Grid>
         <Grid item xs={12} md={8}>
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
+            setChildClicked={setChildClicked}
             coordinates={coordinates}
+            places={places}
           />
         </Grid>
       </Grid>
