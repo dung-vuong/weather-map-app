@@ -17,6 +17,8 @@ function App() {
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState({})
 
+  const [isLoading, setIsLoading] = useState(false)
+
   //GET CURRENT LOCATION
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
@@ -25,9 +27,11 @@ function App() {
   }, [])
 
   useEffect(() => {
+    setIsLoading(true)
     getPlacesData(bounds.sw, bounds.ne)
       .then((data) => {
         setPlaces(data)
+        setIsLoading(false)
       })
   }, [coordinates, bounds])
 
@@ -40,6 +44,7 @@ function App() {
           <List
             places={places}
             childClicked={childClicked}
+            isLoading={isLoading}
           />
         </Grid>
         <Grid item xs={12} md={8}>
