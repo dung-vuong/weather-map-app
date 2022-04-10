@@ -53,7 +53,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places, setChildClicked}) 
                 ))}
             </GoogleMapReact>
         </div>
-    )
+    ) 
 } 
 
 export default Map
